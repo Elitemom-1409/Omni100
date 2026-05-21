@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Extensive SEO Metadata for 70+ Countries -->
+  <title>Omni100 - Free Premium Utilities & APIs</title>
+  <meta name="description" content="Omni100 is the ultimate unified dashboard offering 100 premium, free tools including text manipulation, formatters, calculators, and API utilities. Experience the future of web efficiency.">
+  <meta name="keywords" content="omni tools, free online tools, developer tools, text formatter, base64 encoder, css minifier, free api, seo tools, global utility">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Omni100 Team">
+  <link rel="canonical" href="https://omni100.com">
+  <meta property="og:title" content="Omni100 - 100 Free Premium Utilities">
+  <meta property="og:description" content="Experience the ultimate time traversal utility workspace. 100 completely free developer tools with Free API integration.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Time Traversal Starfield Background -->
+  <canvas id="warp-canvas"></canvas>
+  
+  <!-- Non-Intrusive Ad Space (Top) -->
+  <div class="ad-space">
+    <span class="ad-badge">Sponsored</span>
+    <p>Secure, Family-Friendly Advertisement Space</p>
+  </div>
+
+  <div class="parallax-layer" id="parallax-content">
+    <header>
+      <h1 class="animated-title">Omni100</h1>
+      <p>100 Glassmorphic Instruments of Utility & Free APIs. Traverse time and efficiency.</p>
+    </header>
+    
+    <!-- Theme Segregation Filters -->
+    <div class="theme-filters" id="filters">
+       <button class="filter-btn active" data-theme="all">All Modules</button>
+       <button class="filter-btn" data-theme="text">Text & String</button>
+       <button class="filter-btn" data-theme="math">Math & Logic</button>
+       <button class="filter-btn" data-theme="convert">Converters</button>
+       <button class="filter-btn" data-theme="dev">Dev & Web</button>
+       <button class="filter-btn" data-theme="misc">Time & Misc</button>
+    </div>
+
+    <!-- The Bento Grid -->
+    <main class="bento-grid" id="bento-grid"></main>
+  </div>
+
+  <!-- Non-Intrusive Ad Space (Bottom) -->
+  <div class="ad-space" style="margin-top: 2rem;">
+    <span class="ad-badge">Sponsored</span>
+    <p>Premium Partner Advertisement Space</p>
+  </div>
+
+  <!-- Dynamic Glassmorphic Footer -->
+  <footer class="glass-footer">
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Disclaimer</a>
+      <a href="#">Contact API Support</a>
+    </div>
+    <p class="disclaimer">Disclaimer: Omni100 uses Free Public APIs. No SLA is guaranteed for remote API uptime. No adult content is permitted on this network.</p>
+    <p>&copy; 2026 Omni100 Global Tools. Serving 70+ Countries.</p>
+  </footer>
+
+  <!-- Flythrough Modal (Fixed strictly to viewport center) -->
+  <div class="tool-modal-overlay" id="tool-modal">
+    <div class="tool-modal-container">
+      <div class="tool-modal-header">
+        <h2 id="modal-title" style="display:flex; align-items:center; gap:10px;">Tool</h2>
+        <button id="modal-close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="tool-modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
