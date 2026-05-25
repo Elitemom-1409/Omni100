@@ -139,7 +139,7 @@ const tData = [
   { n: 'Date to Unix', c: 'convert', f: mathF(t=>Math.floor(new Date(t).getTime()/1000), "YYYY-MM-DD", "Epoch Seconds") },
 
   // DEV & WEB (dev)
-  { n: 'UUID v4', c: 'dev', f: (el)=>el.innerHTML=`<button class="btn-primary" style="width:100%" onclick="this.nextElementSibling.value=crypto.randomUUID()">Generate</button><input class="form-control" style="margin-top:1.5rem" readonly>` },
+  { n: 'UUID v4', c: 'dev', f: (el)=>el.innerHTML=`<button class="btn-primary" style="width:100%" onclick="this.nextElementSibling.value=window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c=>{let r=Math.random()*16|0,v=c=='x'?r:(r&0x3|0x8);return v.toString(16)})">Generate</button><input class="form-control" style="margin-top:1.5rem" readonly>` },
   { n: 'Lorem Ipsum', c: 'dev', f: mathF(t=>Array(Number(t)||3).fill("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.").join('\n\n'), "Paragraphs") },
   { n: 'JSON Formatter', c: 'dev', f: textF(t=>JSON.stringify(JSON.parse(t),null,2)) },
   { n: 'JSON Minifier', c: 'dev', f: textF(t=>JSON.stringify(JSON.parse(t))) },
@@ -154,15 +154,15 @@ const tData = [
   { n: 'HEX to RGB', c: 'dev', f: mathF(t=>{let h=t.replace('#','');return `rgb(${parseInt(h.substr(0,2),16)}, ${parseInt(h.substr(2,2),16)}, ${parseInt(h.substr(4,2),16)})`;}, "#HEX") },
   { n: 'Color Picker', c: 'dev', f: (el)=>el.innerHTML=`<input type="color" oninput="this.nextElementSibling.innerText=this.value" style="width:100%;height:150px;background:none;border:none;cursor:pointer"><div class="form-control" style="text-align:center;font-size:2rem;margin-top:1.5rem">#000000</div>` },
   { n: 'Markdown to HTML', c: 'dev', f: textF(t=>t.replace(/^# (.*$)/gim, '<h1>$1</h1>').replace(/^## (.*$)/gim, '<h2>$1</h2>').replace(/\*\*(.*)\*\*/gim, '<b>$1</b>').replace(/\*(.*)\*/gim, '<i>$1</i>')) },
-  { n: 'JWT Payload Decoder', c: 'dev', f: textF(t=>JSON.stringify(JSON.parse(atob(t.split('.')[1])),null,2)) },
+  { n: 'JWT Payload Decoder', c: 'dev', f: textF(t=>{try{let p=t.split('.')[1];return JSON.stringify(JSON.parse(atob(p.replace(/-/g, '+').replace(/_/g, '/'))),null,2)}catch(e){return 'Invalid JWT Format';}}) },
   { n: 'CSS Box-Shadow', c: 'dev', f: mathF(t=>`box-shadow: ${t}px ${t}px ${t*2}px rgba(0,0,0,0.5);`, "Base size px") },
-  { n: 'Base64 to Image', c: 'dev', f: (el)=>{ el.innerHTML=`<textarea id="i" class="form-control" style="height:100px" placeholder="Base64 Data URI"></textarea><button id="b" class="btn-primary" style="width:100%;margin-bottom:1.5rem">View Image</button><img id="o" style="max-width:100%;border-radius:12px;display:none">`; document.getElementById('b').onclick=()=>{let im=document.getElementById('o'); im.src=document.getElementById('i').value; im.style.display='block';} } },
-  { n: 'Javascript Eval', c: 'dev', f: textF(t=>{let l=[];const c=console.log;console.log=(...a)=>l.push(a.join(' '));try{eval(t);}catch(e){l.push(e);}console.log=c;return l.join('\n');}) },
+  { n: 'Base64 to Image', c: 'dev', f: (el)=>{ el.innerHTML=`<textarea id="i" class="form-control" style="height:100px" placeholder="Base64 Data URI (or raw base64)"></textarea><button id="b" class="btn-primary" style="width:100%;margin-bottom:1.5rem">View Image</button><img id="o" style="max-width:100%;border-radius:12px;display:none">`; el.querySelector('#b').onclick=()=>{let im=el.querySelector('#o'); let v=el.querySelector('#i').value; im.src=v.includes('data:image')?v:'data:image/png;base64,'+v; im.style.display='block';} } },
+  { n: 'Javascript Eval', c: 'dev', f: textF(t=>{let l=[];const c=console.log;console.log=(...a)=>l.push(a.join(' '));let r;try{r=eval(t);}catch(e){l.push(e);}console.log=c;return l.length?l.join('\n'):(r!==undefined?String(r):'');}) },
   { n: 'Keycode Tester', c: 'dev', f: (el)=>{ el.innerHTML=`<div class="form-control" style="text-align:center;font-size:3rem" id="kc">Press Key</div>`; const h=(e)=>{e.preventDefault();document.getElementById('kc').innerText=e.keyCode;}; window.addEventListener('keydown',h); el.dataset.clean=()=>window.removeEventListener('keydown',h); } },
 
   // TIME & MISC (misc)
-  { n: 'Stopwatch', c: 'misc', f: (el)=>{ el.innerHTML=`<div class="form-control" style="font-size:4rem;text-align:center;margin-bottom:1.5rem" id="sw">0</div><button class="btn-primary" style="width:100%" id="swb">Start/Stop</button>`; let t,s=0,r=0; document.getElementById('swb').onclick=()=>{if(r){clearInterval(t);r=0;}else{r=1;t=setInterval(()=>{document.getElementById('sw').innerText=++s;},1000);}} } },
-  { n: 'Timer (sec)', c: 'misc', f: (el)=>{ el.innerHTML=`<input id="ti" class="form-control" placeholder="Seconds"><button id="tb" class="btn-primary" style="width:100%;margin-bottom:1.5rem">Start</button><div class="form-control" style="font-size:4rem;text-align:center" id="to">0</div>`; document.getElementById('tb').onclick=()=>{let s=Number(document.getElementById('ti').value);let t=setInterval(()=>{document.getElementById('to').innerText=s;if(s--<=0)clearInterval(t);},1000);} } },
+  { n: 'Stopwatch', c: 'misc', f: (el)=>{ el.innerHTML=`<div class="form-control" style="font-size:4rem;text-align:center;margin-bottom:1.5rem" id="sw">0</div><button class="btn-primary" style="width:100%" id="swb">Start/Stop</button>`; let t,s=0,r=0; el.querySelector('#swb').onclick=()=>{if(r){clearInterval(t);r=0;}else{r=1;t=setInterval(()=>{el.querySelector('#sw').innerText=++s;},1000);}} } },
+  { n: 'Timer (sec)', c: 'misc', f: (el)=>{ el.innerHTML=`<input id="ti" class="form-control" placeholder="Seconds"><button id="tb" class="btn-primary" style="width:100%;margin-bottom:1.5rem">Start</button><div class="form-control" style="font-size:4rem;text-align:center" id="to">0</div>`; el.querySelector('#tb').onclick=()=>{let s=Number(el.querySelector('#ti').value);let t=setInterval(()=>{el.querySelector('#to').innerText=s;if(s--<=0)clearInterval(t);},1000);} } },
   { n: 'Coin Flipper', c: 'misc', f: (el)=>el.innerHTML=`<button class="btn-primary" style="width:100%" onclick="this.nextElementSibling.innerText=Math.random()>0.5?'HEADS':'TAILS'">Flip Coin</button><div class="form-control" style="font-size:3rem;text-align:center;margin-top:1.5rem">...</div>` },
   { n: 'Dice Roller (1-6)', c: 'misc', f: (el)=>el.innerHTML=`<button class="btn-primary" style="width:100%" onclick="this.nextElementSibling.innerText=Math.floor(Math.random()*6)+1">Roll Dice</button><div class="form-control" style="font-size:3rem;text-align:center;margin-top:1.5rem">...</div>` },
   { n: 'Magic 8 Ball', c: 'misc', f: (el)=>el.innerHTML=`<input class="form-control" placeholder="Ask a question"><button class="btn-primary" style="width:100%" onclick="let a=['Yes','No','Maybe','Ask again later']; this.nextElementSibling.innerText=a[Math.floor(Math.random()*4)]">Shake</button><div class="form-control" style="font-size:2rem;text-align:center;margin-top:1.5rem">...</div>` },
@@ -170,7 +170,13 @@ const tData = [
   { n: 'Random Fact API', c: 'misc', f: apiF('https://uselessfacts.jsph.pl/random.json?language=en', d=>d.text) },
   { n: 'Public IP Info API', c: 'dev', f: apiF('https://ipapi.co/json/', d=>`IP: ${d.ip}\nCity: ${d.city}\nCountry: ${d.country_name}\nISP: ${d.org}`) },
   { n: 'Cat Fact API', c: 'misc', f: apiF('https://catfact.ninja/fact', d=>d.fact) },
-  { n: 'Exchange Rates API', c: 'convert', f: apiF('https://open.er-api.com/v6/latest/USD', d=>`1 USD = \nEUR: ${d.rates.EUR}\nGBP: ${d.rates.GBP}\nJPY: ${d.rates.JPY}\nINR: ${d.rates.INR}\nCAD: ${d.rates.CAD}`) }
+  { n: 'Exchange Rates API', c: 'convert', f: apiF('https://open.er-api.com/v6/latest/USD', d=>`1 USD = \nEUR: ${d.rates.EUR}\nGBP: ${d.rates.GBP}\nJPY: ${d.rates.JPY}\nINR: ${d.rates.INR}\nCAD: ${d.rates.CAD}`) },
+  
+  // NEW ADVANCED TOOLS
+  { n: 'Aspect Ratio Calc', c: 'math', f: mathF(t=>{let [w,h]=t.split(/[:,x\/]/).map(Number);let g=(a,b)=>{while(b)[a,b]=[b,a%b];return Math.abs(a);};let d=g(w,h);return `${w/d}:${h/d}`}, "1920x1080 or 1920:1080") },
+  { n: 'SHA-256 Hash', c: 'dev', f: (el)=>{ el.innerHTML=`<input id="in" class="form-control" placeholder="String"><button class="btn-primary" id="b" style="width:100%;margin:1.5rem 0">Hash</button><input id="out" class="form-control" readonly>`; el.querySelector('#b').onclick=async()=>{let b=new TextEncoder().encode(el.querySelector('#in').value);let h=await crypto.subtle.digest('SHA-256',b);el.querySelector('#out').value=Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('');}; } },
+  { n: 'CSS Gradient Gen', c: 'dev', f: (el)=>{ el.innerHTML=`<input type="color" id="c1" value="#00d4ff" style="width:48%;height:50px;cursor:pointer;background:none;border:none"> <input type="color" id="c2" value="#b100ff" style="width:48%;height:50px;cursor:pointer;background:none;border:none"><div id="bg" style="width:100%;height:100px;margin:1.5rem 0;border-radius:12px;background:linear-gradient(90deg,#00d4ff,#b100ff)"></div><input id="out" class="form-control" value="linear-gradient(90deg, #00d4ff, #b100ff)" readonly>`; const update=()=>{let g=\`linear-gradient(90deg, \${el.querySelector('#c1').value}, \${el.querySelector('#c2').value})\`; el.querySelector('#bg').style.background=g; el.querySelector('#out').value=g;}; el.querySelector('#c1').oninput=update; el.querySelector('#c2').oninput=update; } },
+  { n: 'Regex Tester', c: 'dev', f: (el)=>{ el.innerHTML=`<input id="r" class="form-control" placeholder="Regex (e.g. /[a-z]+/g)"><textarea id="i" class="form-control" style="margin:1.5rem 0;height:80px;resize:none" placeholder="Test String"></textarea><button id="b" class="btn-primary" style="width:100%;margin-bottom:1.5rem">Test</button><textarea id="o" class="form-control" style="height:80px;resize:none" readonly></textarea>`; el.querySelector('#b').onclick=()=>{try{let r=el.querySelector('#r').value;let pts=r.match(new RegExp('^/(.*?)/([gimy]*)$'));let rx=pts?new RegExp(pts[1],pts[2]):new RegExp(r);let v=el.querySelector('#i').value;el.querySelector('#o').value=JSON.stringify(v.match(rx)||'No match');}catch(e){el.querySelector('#o').value='Invalid Regex';}}; } }
 ];
 
 // --- DYNAMIC PREVIEW & ICON GENERATOR ---
@@ -221,6 +227,9 @@ function renderGrid(filter) {
     card.className = 'bento-card';
     card.style.setProperty('--theme-color', themes[tool.c].c);
     card.setAttribute('data-theme', tool.c);
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Open Tool: ${tool.n}`);
     
     // Flythrough entrance animation delay
     card.style.animation = `scaleIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards ${displayIndex * 0.02}s`;
@@ -238,6 +247,7 @@ function renderGrid(filter) {
       <div class="card-theme">${tool.c}</div>
     `;
     card.onclick = (e) => triggerFlythrough(card, tool);
+    card.onkeypress = (e) => { if(e.key === 'Enter' || e.key === ' ') triggerFlythrough(card, tool); };
     grid.appendChild(card);
   });
   lucide.createIcons();
@@ -272,7 +282,15 @@ function triggerFlythrough(cardElement, tool) {
   grid.style.filter = 'blur(10px)';
   
   setTimeout(() => {
-    modalTitle.innerHTML = `<i data-lucide="${themes[tool.c].i}"></i> ${tool.n}`;
+    modal.setAttribute('data-theme', tool.c);
+    
+    // Inject the title and a Backlink / Share button
+    document.getElementById('modal-title').innerHTML = `
+      <i data-lucide="${themes[tool.c].i}"></i> ${tool.n}
+      <button onclick="navigator.clipboard.writeText('<a href=\\'https://omni100.com\\'>Check out ${tool.n} on Omni100</a>'); alert('HTML Backlink copied to clipboard!');" style="margin-left: 15px; background: rgba(0,212,255,0.2); border: 1px solid #00d4ff; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;" title="Copy HTML Link">
+        <i data-lucide="link" style="width: 14px; height: 14px;"></i> Share Link
+      </button>
+    `;
     modalTitle.style.color = themes[tool.c].c;
     modal.style.setProperty('--theme-color', themes[tool.c].c);
     
@@ -283,14 +301,20 @@ function triggerFlythrough(cardElement, tool) {
     tool.f(modalBody);
     if(modalBody.dataset.clean) { currentCleanup = modalBody.dataset.clean; delete modalBody.dataset.clean; }
     
+    // Set focus to the first input for accessibility
+    const firstInput = modalBody.querySelector('input, textarea');
+    if(firstInput) setTimeout(() => firstInput.focus(), 100);
+
     lucide.createIcons();
     modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden'; // Lock background scrolling
   }, 400); // Wait for zoom
 }
 
 document.getElementById('modal-close').onclick = () => {
   modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = 'auto'; // Restore background scrolling
   if(currentCleanup) { currentCleanup(); currentCleanup = null; }
   
@@ -299,5 +323,109 @@ document.getElementById('modal-close').onclick = () => {
   grid.style.opacity = '1';
   grid.style.filter = 'none';
   
-  setTimeout(() => { modalBody.innerHTML = ''; }, 600);
 };
+
+// --- FREE AI CHATBOT LOGIC (GEMINI API) ---
+function initChatbot() {
+  const chatToggle = document.getElementById('chatbot-toggle');
+  const chatWindow = document.getElementById('chatbot-window');
+  const chatClose = document.getElementById('chatbot-close');
+  const chatInput = document.getElementById('chatbot-input');
+  const chatSend = document.getElementById('chatbot-send');
+  const chatMessages = document.getElementById('chatbot-messages');
+
+  if(!chatToggle) return;
+
+  chatToggle.onclick = () => { chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex'; };
+  chatClose.onclick = () => chatWindow.style.display = 'none';
+
+  let geminiKey = localStorage.getItem('omni_gemini_key') || '';
+  let conversationHistory = [];
+
+  const appendMessage = (msg, sender) => {
+    const d = document.createElement('div');
+    d.style.margin = '8px 0'; d.style.padding = '8px 12px'; d.style.borderRadius = '8px';
+    d.style.maxWidth = '80%'; d.style.wordWrap = 'break-word';
+    d.style.background = sender === 'user' ? 'rgba(0, 212, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)';
+    d.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
+    d.style.border = `1px solid ${sender === 'user' ? '#00d4ff' : 'rgba(255,255,255,0.2)'}`;
+    
+    // Simple markdown parsing for bold and breaks
+    d.innerHTML = msg.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+    chatMessages.appendChild(d);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  // Clear the initial message loaded from HTML
+  chatMessages.innerHTML = '';
+
+  if(!geminiKey) {
+    appendMessage("To enable ultra-intelligent responses, please paste your **Gemini API key** below. It is stored securely on your browser. Get a free one from Google AI Studio.", 'bot');
+  } else {
+    appendMessage("OmniAI Assistant Online. How can I help you navigate the 100+ tools or optimize your workflow?", 'bot');
+  }
+
+  const handleSend = async () => {
+    const text = chatInput.value.trim();
+    if(!text) return;
+    
+    appendMessage(text, 'user');
+    chatInput.value = '';
+
+    if(!geminiKey) {
+      if(text.length > 20 && text.length < 60 && !text.includes(' ')) {
+        geminiKey = text;
+        localStorage.setItem('omni_gemini_key', geminiKey);
+        appendMessage("Key saved securely! You can now chat with me.", 'bot');
+      } else {
+        appendMessage("That doesn't look like an API key. Please paste a valid Gemini API key first.", 'bot');
+      }
+      return;
+    }
+
+    conversationHistory.push({ role: "user", parts: [{ text: text }] });
+    const typingElement = document.createElement('div');
+    typingElement.innerText = "Thinking..."; typingElement.style.color = "#aaa"; typingElement.style.margin = "8px 0";
+    chatMessages.appendChild(typingElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: "You are OmniAI, a helpful and brief assistant for Omni100, a website with 100 free developer utilities, calculators, converters, and APIs. Keep your answers short and helpful." }]},
+          contents: conversationHistory
+        })
+      });
+
+      typingElement.remove();
+      
+      if(!response.ok) {
+        if(response.status === 400 || response.status === 403) {
+           appendMessage("Invalid API Key. Please provide a valid key.", 'bot');
+           localStorage.removeItem('omni_gemini_key');
+           geminiKey = '';
+        } else {
+           appendMessage("Error communicating with Gemini API.", 'bot');
+        }
+        return;
+      }
+
+      const data = await response.json();
+      const botReply = data.candidates[0].content.parts[0].text;
+      conversationHistory.push({ role: "model", parts: [{ text: botReply }] });
+      appendMessage(botReply, 'bot');
+
+    } catch (e) {
+      typingElement.remove();
+      appendMessage("Network Error: Could not reach Gemini.", 'bot');
+    }
+  };
+
+  chatSend.onclick = handleSend;
+  chatInput.onkeypress = (e) => { if(e.key === 'Enter') handleSend(); };
+}
+
+// Call init shortly after load to ensure DOM is ready
+setTimeout(initChatbot, 1000);

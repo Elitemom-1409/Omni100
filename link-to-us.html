@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Press & Link to Us - Omni100</title>
+  <meta name="description" content="Help spread the word about Omni100! Grab HTML embed codes, badges, and links to share our 100 free developer tools on your blog or website.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://omni100.com/link-to-us.html">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    .link-container {
+      max-width: 800px;
+      margin: 100px auto;
+      background: rgba(10, 10, 18, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 24px;
+      padding: 3rem;
+      color: #e2e8f0;
+      box-shadow: 0 25px 50px -12px rgba(0, 212, 255, 0.15);
+    }
+    h1 { color: #00d4ff; font-size: 2.5rem; margin-bottom: 1rem; }
+    h2 { color: #b100ff; margin-top: 2rem; margin-bottom: 1rem; }
+    .snippet-box {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: monospace;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #00d4ff;
+      color: #000;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="warp-canvas"></canvas>
+  <div class="link-container">
+    <a href="index.html" style="color: #00d4ff; text-decoration: none; display: flex; align-items: center; gap: 5px; margin-bottom: 2rem;">
+      <i data-lucide="arrow-left"></i> Back to Tools
+    </a>
+    
+    <h1>Press & Link to Us</h1>
+    <p>Do you love using Omni100? Help us keep these 100+ premium tools completely free by linking to us from your blog, portfolio, or GitHub README!</p>
+
+    <h2>1. Standard Text Link</h2>
+    <p>Simply copy and paste this HTML into your website:</p>
+    <div class="snippet-box">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText); alert('Copied!');">Copy</button>
+      <code>&lt;a href="https://omni100.com" title="100 Free Developer Tools & Converters"&gt;Omni100 - Free Developer Utilities&lt;/a&gt;</code>
+    </div>
+
+    <h2>2. Feature specific Link (SEO Tool)</h2>
+    <div class="snippet-box">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText); alert('Copied!');">Copy</button>
+      <code>&lt;a href="https://omni100.com"&gt;I use Omni100 for my daily JSON formatting and Base64 encoding.&lt;/a&gt;</code>
+    </div>
+
+    <h2>3. Markdown Badge (For GitHub)</h2>
+    <p>Perfect for your repository README.md files!</p>
+    <div class="snippet-box">
+      <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText); alert('Copied!');">Copy</button>
+      <code>[![Omni100 Tools](https://img.shields.io/badge/Tools-Omni100-00d4ff?style=for-the-badge)](https://omni100.com)</code>
+    </div>
+
+    <p style="margin-top: 3rem; text-align: center; opacity: 0.7;">Thank you for supporting free software on the web!</p>
+  </div>
+  
+  <script>lucide.createIcons();</script>
+</body>
+</html>

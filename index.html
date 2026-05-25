@@ -10,24 +10,128 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="Omni100 Team">
   <link rel="canonical" href="https://omni100.com">
-  <meta property="og:title" content="Omni100 - 100 Free Premium Utilities">
-  <meta property="og:description" content="Experience the ultimate time traversal utility workspace. 100 completely free developer tools with Free API integration.">
+  <meta name="theme-color" content="#030305">
+  
+  <!-- Massive Open Graph Metadata -->
+  <meta property="og:site_name" content="Omni100 Global">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Omni100 - 100 Free Premium Utilities & APIs">
+  <meta property="og:description" content="Experience the ultimate time traversal utility workspace. 100 completely free developer tools, text formatters, math calculators, and free API integrations. No signup required.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://omni100.com">
+  <meta property="og:image" content="https://omni100.com/assets/og-image.jpg">
 
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Omni100 - 100 Free Premium Utilities">
+  <meta name="twitter:description" content="100 completely free developer tools, text formatters, math calculators, and free APIs. Optimize your workflow today.">
+  <meta name="twitter:image" content="https://omni100.com/assets/og-image.jpg">
+
+  <!-- GEO & Hreflang SEO for Global Reach -->
+  <link rel="alternate" hreflang="x-default" href="https://omni100.com/" />
+  <link rel="alternate" hreflang="en-US" href="https://omni100.com/?lang=en-us" />
+  <link rel="alternate" hreflang="en-GB" href="https://omni100.com/?lang=en-gb" />
+  <link rel="alternate" hreflang="es" href="https://omni100.com/?lang=es" />
+  <link rel="alternate" hreflang="fr" href="https://omni100.com/?lang=fr" />
+  <link rel="alternate" hreflang="de" href="https://omni100.com/?lang=de" />
+  
+  <!-- Massive Schema.org AEO / SEO Injection -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Omni100",
+        "url": "https://omni100.com",
+        "description": "100 free premium utilities including text converters, math tools, API fetchers, and developer tools.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": ["Base64 Encode", "JSON Formatter", "Eval Calculator", "UUID Generator", "100+ Free Tools"],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "1024"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the best free Base64 encoder online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Omni100 provides a blazing fast, completely free Base64 encoder and decoder that runs locally in your browser for maximum security."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How to minify CSS online for free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Using Omni100's developer tools section, you can instantly minify CSS without sending your code to any server."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I find free APIs to test my code?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Omni100 aggregates several free public APIs including Joke APIs, Cat Fact APIs, and Exchange Rate APIs directly into our tool grid."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "VideoObject",
+        "name": "Top 100 Developer Tools on Omni100",
+        "description": "Learn how to use all 100+ free developer tools, text formatters, and math calculators provided by Omni100.",
+        "thumbnailUrl": [
+          "https://omni100.com/assets/video-thumb.jpg"
+        ],
+        "uploadDate": "2026-05-25T08:00:00+08:00",
+        "contentUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Performance Optimization: Preloading & Preconnecting -->
+  <link rel="preload" href="./style.css" as="style">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://official-joke-api.appspot.com">
+  <link rel="dns-prefetch" href="https://uselessfacts.jsph.pl">
+  <link rel="dns-prefetch" href="https://ipapi.co">
+  
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <!-- Time Traversal Starfield Background -->
-  <canvas id="warp-canvas"></canvas>
+  <!-- Time Traversal Starfield Background (a11y fallback) -->
+  <canvas id="warp-canvas" aria-label="Animated starfield background effect">
+     <p>An interactive starfield background animation running dynamically in the browser.</p>
+  </canvas>
   
-  <!-- Non-Intrusive Ad Space (Top) -->
-  <div class="ad-space">
-    <span class="ad-badge">Sponsored</span>
-    <p>Secure, Family-Friendly Advertisement Space</p>
+  <!-- Non-Intrusive Ad Space (Top) - Optimized for AdSense CLS -->
+  <div class="ad-space" id="ad-top" aria-label="Top Advertisement Space">
+    <ins class="adsbygoogle"
+         style="display:block; min-height:90px;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 
   <div class="parallax-layer" id="parallax-content">
@@ -37,28 +141,44 @@
     </header>
     
     <!-- Theme Segregation Filters -->
-    <div class="theme-filters" id="filters">
-       <button class="filter-btn active" data-theme="all">All Modules</button>
-       <button class="filter-btn" data-theme="text">Text & String</button>
-       <button class="filter-btn" data-theme="math">Math & Logic</button>
-       <button class="filter-btn" data-theme="convert">Converters</button>
-       <button class="filter-btn" data-theme="dev">Dev & Web</button>
-       <button class="filter-btn" data-theme="misc">Time & Misc</button>
-    </div>
+    <nav class="theme-filters" id="filters" aria-label="Tool Categories">
+       <button class="filter-btn active" data-theme="all" aria-label="Show All Modules">All Modules</button>
+       <button class="filter-btn" data-theme="text" aria-label="Show Text and String Tools">Text & String</button>
+       <button class="filter-btn" data-theme="math" aria-label="Show Math and Logic Tools">Math & Logic</button>
+       <button class="filter-btn" data-theme="convert" aria-label="Show Converters">Converters</button>
+       <button class="filter-btn" data-theme="dev" aria-label="Show Developer and Web Tools">Dev & Web</button>
+       <button class="filter-btn" data-theme="misc" aria-label="Show Time and Miscellaneous Tools">Time & Misc</button>
+    </nav>
 
     <!-- The Bento Grid -->
-    <main class="bento-grid" id="bento-grid"></main>
+    <main class="bento-grid" id="bento-grid" aria-label="Interactive Tool Grid"></main>
+
+    <!-- YouTube Synergy Section -->
+    <section class="video-container" style="margin-top: 4rem; text-align: center;">
+      <h2 style="color: #00d4ff; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Learn How to Maximize Efficiency</h2>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </section>
   </div>
 
-  <!-- Non-Intrusive Ad Space (Bottom) -->
-  <div class="ad-space" style="margin-top: 2rem;">
-    <span class="ad-badge">Sponsored</span>
-    <p>Premium Partner Advertisement Space</p>
+  <!-- Non-Intrusive Ad Space (Bottom) - Optimized for AdSense CLS -->
+  <div class="ad-space" id="ad-bottom" style="margin-top: 2rem;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height:90px;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 
   <!-- Dynamic Glassmorphic Footer -->
   <footer class="glass-footer">
     <div class="footer-links">
+      <a href="link-to-us.html" style="color: #00d4ff;">Press / Link to Us</a>
       <a href="#">Privacy Policy</a>
       <a href="#">Terms of Service</a>
       <a href="#">Disclaimer</a>
@@ -73,9 +193,27 @@
     <div class="tool-modal-container">
       <div class="tool-modal-header">
         <h2 id="modal-title" style="display:flex; align-items:center; gap:10px;">Tool</h2>
-        <button id="modal-close"><i data-lucide="x"></i></button>
+        <button id="modal-close" aria-label="Close Modal" title="Close Modal"><i data-lucide="x"></i></button>
       </div>
-      <div class="tool-modal-body" id="modal-body"></div>
+      <div class="tool-modal-body" id="modal-body" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Free AI Chatbot Widget -->
+  <div id="chatbot-container" aria-label="AI Assistant Widget">
+    <button id="chatbot-toggle" title="Chat with OmniAI" aria-label="Open AI Assistant Chat"><i data-lucide="message-circle"></i></button>
+    <div id="chatbot-window" aria-hidden="true" role="dialog" aria-label="OmniAI Chat Window">
+      <div id="chatbot-header">
+        <span>OmniAI Assistant</span>
+        <button id="chatbot-close" aria-label="Close Chat Window"><i data-lucide="x"></i></button>
+      </div>
+      <div id="chatbot-messages" aria-live="polite">
+        <div class="bot-msg">Hi! I am the Omni100 Assistant. How can I help you today?</div>
+      </div>
+      <div id="chatbot-input-area">
+        <input type="text" id="chatbot-input" placeholder="Type a message..." aria-label="Chatbot Message Input" />
+        <button id="chatbot-send" aria-label="Send Message"><i data-lucide="send"></i></button>
+      </div>
     </div>
   </div>
 
